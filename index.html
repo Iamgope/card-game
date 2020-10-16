@@ -22,6 +22,10 @@
         td,th{
             padding: 10px;
         }
+        .viewer{
+            border:1px solid black;
+            border-collapse: collapse;
+        }
     </style>
 </head>
 <body style="background-image:url('img/Background.jpg');">
@@ -90,14 +94,55 @@
             
         }
         class CardViewer extends React.Component{
+            constructor(props){
+                super(props);
+                this.state={
+                    swap:false,
+                    pointer:0
+                }
+            }
+             
             render(){
+                const rows=this.props.card.map((card,i)=>{
+                    if(i==this.state.pointer)
+               {     if(this.state.swap){
+                        return(
+                     <div key={i}>
+                       <h1>{card.back}</h1>
+                       <button onClick={this.changeHandler}>swap</button>
+                    </div>
+                );
+                    }
+                    else{
+                        return(
+                    <div key={i}>
+                       <h1>{card.front}</h1>
+                       <button onClick={this.changeHandler}>swap</button>
+                    </div>
+                );
+                    }}
+                })
                 return(
                     <div>
                     <h1>Card Viewer</h1>
+                     <div>{rows}
+                     <button onClick={this.setPointer}>Next</button>
+                     </div>
                      <hr/>
                      <button onClick={this.props.switchMode}>GO To Editor</button>
                     </div>
                 );
+            }
+            changeHandler=()=>{
+                this.setState(state=>({
+                    swap:!state.swap
+                }))
+            }
+            setPointer=()=>{
+                this.setState(state=>({
+                 pointer:(state.pointer+1)%(this.props.card.length)  ,
+                 swap:false 
+                }))
             }
         }
         class App extends React.Component{
