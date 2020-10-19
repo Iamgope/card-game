@@ -1,8 +1,50 @@
-<html>
-    <head>
-        <title>new file</title>
-    </head>
-    <body>
-        hello junta!
-    </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+     <div id="app"></div>
+     <script type="text/babel">
+    class App extends React.Component{
+        constructor(props){
+            super(props);
+            this.state={
+                counter:0
+            };
+        }
+    comonent
+
+        render(){
+            return(
+                <div>
+                 {this.state.counter}
+                <div>
+                <button onClick={this.HandleClickInc}>Increment</button>
+                <button onClick={this.HandleClickDec}>Decrement</button>
+                </div>
+                </div>
+            );
+        }
+        HandleClickInc=()=>{
+            this.setState(state=>({
+                counter:state.counter+1
+            }));
+        }
+        HandleClickDec=()=>{
+            this.setState(state=>({
+                counter:state.counter-1
+            }))
+        }
+    }
+
+     ReactDOM.render(<App/>,document.querySelector("#app"));
+    </script>
+     
+</body>
 </html>
